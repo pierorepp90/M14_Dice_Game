@@ -15,8 +15,8 @@ public class PlayerDto {
 	@JsonProperty("account_time")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date accountTime;
-	@JsonProperty("user_name")
-	private String userName;
+	@JsonProperty("username")
+	private String username;
 	@JsonProperty("password")
 	private String password;
 	@JsonProperty("succes_rate")
@@ -30,7 +30,7 @@ public class PlayerDto {
 		PlayerDto pDto = new PlayerDto();
 		pDto.setId(player.getId());
 		pDto.setAccountTime(player.getAccountTime());
-		pDto.setUserName(player.getUserName());
+		pDto.setUsername(player.getUsername());
 		pDto.setPassword(player.getPassword());
 		pDto.setSuccesRate(player.getSuccesRate());
 
@@ -49,8 +49,8 @@ public class PlayerDto {
 		return accountTime;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
 	public String getPassword() {
@@ -65,8 +65,8 @@ public class PlayerDto {
 		this.accountTime = accountTime;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public void setPassword(String password) {

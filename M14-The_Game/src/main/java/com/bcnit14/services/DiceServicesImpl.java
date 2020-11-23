@@ -1,7 +1,6 @@
 package com.bcnit14.services;
 
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +38,9 @@ public class DiceServicesImpl implements IDiceService {
 	}
 
 	@Override
-	public List<Dice> findDicesByPlayerId(String playerId) {
-
-		return iDiceDao.findAll().stream().filter(d->d.getPlayer().equals(playerId)).collect(Collectors.toList());
+	public List<Dice> findDicesByPlayerId(String playerId) throws Exception{
+		List<Dice> dicesByPlayerId = iDiceDao.findAll().stream().filter(d->d.getPlayer().equals(playerId)).collect(Collectors.toList());
+		return dicesByPlayerId;
 	}
 
 

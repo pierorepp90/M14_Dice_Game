@@ -24,7 +24,12 @@ public class DbSeeder implements CommandLineRunner {
 		iPlayerDao.deleteAll();
 		iDiceDao.deleteAll();
 		// create data
-		iPlayerDao.save(new Player("example1","Piero", "notencoded"));
+		Player piero = new Player("1","Piero", "notencoded");
+		piero.setRole(com.bcnit14.security.DiceGameRoles.AUTHOR);
+		Player jonatan = new Player("2","Jonatan", "iknowitsnosafe");
+		jonatan.setRole(com.bcnit14.security.DiceGameRoles.ADMIN);
+		iPlayerDao.save(piero);
+		iPlayerDao.save(jonatan);
 		iDiceDao.save(new Dice("1"));
 		iDiceDao.save(new Dice("1"));
 		iDiceDao.save(new Dice("1"));
@@ -32,21 +37,21 @@ public class DbSeeder implements CommandLineRunner {
 		iDiceDao.save(new Dice("1"));
 		iDiceDao.save(new Dice("1"));
 
-		iPlayerDao.save(new Player("example2", "LuckySeven", "casinodestroyer"));
-		iDiceDao.save(new Dice("example2"));
-		iDiceDao.save(new Dice("example2"));
-		iDiceDao.save(new Dice("example2"));
-		iDiceDao.save(new Dice("example2"));
-		iDiceDao.save(new Dice("example2"));
-		iDiceDao.save(new Dice("example2"));
+		iPlayerDao.save(new Player("3", "LuckySeven", "casinodestroyer"));
+		iDiceDao.save(new Dice("3"));
+		iDiceDao.save(new Dice("3"));
+		iDiceDao.save(new Dice("3"));
+		iDiceDao.save(new Dice("3"));
+		iDiceDao.save(new Dice("3"));
+		iDiceDao.save(new Dice("3"));
 
-		iPlayerDao.save(new Player("example3", "AzarLover", "wastetimeandomoney"));
-		iDiceDao.save(new Dice("example3"));
-		iDiceDao.save(new Dice("example3"));
-		iDiceDao.save(new Dice("example3"));
-		iDiceDao.save(new Dice("example3"));
-		iDiceDao.save(new Dice("example3"));
-		iDiceDao.save(new Dice("example3"));
+		iPlayerDao.save(new Player("4", "AzarLover", "wastetimeandomoney"));
+		iDiceDao.save(new Dice("4"));
+		iDiceDao.save(new Dice("4"));
+		iDiceDao.save(new Dice("4"));
+		iDiceDao.save(new Dice("4"));
+		iDiceDao.save(new Dice("4"));
+		iDiceDao.save(new Dice("4"));
 
 	}
 

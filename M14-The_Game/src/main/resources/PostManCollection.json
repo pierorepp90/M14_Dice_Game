@@ -1,10 +1,70 @@
 {
 	"info": {
-		"_postman_id": "09c1e8f3-e382-4713-b174-814086d74410",
-		"name": "M14_Dice_Game",
+		"_postman_id": "70da805b-9b4a-4e6c-8d86-4a8c2a16449d",
+		"name": "M14_DiceGame",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Login as Author",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Piero\",\r\n    \"password\":\"notencoded\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login as Player",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"LuckySeven\",\r\n    \"password\":\"casinodestroyer\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Create Player",
 			"request": {
@@ -12,7 +72,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"DiceAddict\",\r\n    \"password\": \"1234\"\r\n\r\n}",
+					"raw": "{\r\n    \"username\": \"DiceAddict\",\r\n    \"password\": \"1234\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +100,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"accountTime\": \"2020-11-10T22:30:00.000+00:00\",\r\n    \"userName\": \"\",\r\n    \"password\": \"supersafe\"\r\n\r\n}",
+					"raw": "{\r\n    \"accountTime\": \"2020-11-10T22:30:00.000+00:00\",\r\n    \"username\": \"\",\r\n    \"password\": \"supersafe\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +128,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"accountTime\": \"2020-11-10T22:30:00.000+00:00\",\r\n    \"password\": \"thepassword\"\r\n\r\n}",
+					"raw": "{\r\n    \"password\": \"thepassword\"\r\n\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -90,40 +150,22 @@
 			"response": []
 		},
 		{
-			"name": "Create Anonymus player 3",
+			"name": "Roll dices by player id(author token)",
 			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"password\": \"justpassword\"\r\n\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjUxMzAsImlzcyI6IlBpZXJvIiwic3ViIjoiUGllcm8iLCJhdWQiOiJbUk9MRV9BVVRIT1IsIHBsYXllcjphZG1pbiwgcGxheWVyOnBsYXksIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAyOTEzMH0.",
+							"type": "string"
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:8080/api/players",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"players"
 					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Roll dices by player id",
-			"request": {
+				},
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/players/example2/games",
+					"raw": "localhost:8080/api/players/3/games",
 					"host": [
 						"localhost"
 					],
@@ -131,7 +173,38 @@
 					"path": [
 						"api",
 						"players",
-						"example2",
+						"3",
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Roll dices by player id(player token)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjU0MzYsImlzcyI6IlBpZXJvIiwic3ViIjoiTHVja3lTZXZlbiIsImF1ZCI6IltST0xFX1BMQVlFUiwgcGxheWVyOnBsYXldIiwiZXhwIjoxNjA3MDI5NDM2fQ.",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/players/3/games",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"players",
+						"3",
 						"games"
 					]
 				}
@@ -141,10 +214,20 @@
 		{
 			"name": "Delete player by id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjU0OTgsImlzcyI6IlBpZXJvIiwic3ViIjoiUGllcm8iLCJhdWQiOiJbUk9MRV9BVVRIT1IsIHBsYXllcjphZG1pbiwgcGxheWVyOnBsYXksIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAyOTQ5OH0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/players/example1",
+					"raw": "localhost:8080/api/players/4",
 					"host": [
 						"localhost"
 					],
@@ -152,7 +235,7 @@
 					"path": [
 						"api",
 						"players",
-						"example1"
+						"4"
 					]
 				}
 			},
@@ -161,10 +244,20 @@
 		{
 			"name": "Delete games by player id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjU0OTgsImlzcyI6IlBpZXJvIiwic3ViIjoiUGllcm8iLCJhdWQiOiJbUk9MRV9BVVRIT1IsIHBsYXllcjphZG1pbiwgcGxheWVyOnBsYXksIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAyOTQ5OH0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/players/example1/games",
+					"raw": "localhost:8080/api/players/4/games",
 					"host": [
 						"localhost"
 					],
@@ -172,7 +265,7 @@
 					"path": [
 						"api",
 						"players",
-						"example1",
+						"4",
 						"games"
 					]
 				}
@@ -180,13 +273,23 @@
 			"response": []
 		},
 		{
-			"name": "Edit userName",
+			"name": "Edit username",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjY4NjQsImlzcyI6IlBpZXJvIiwic3ViIjoiUGllcm8iLCJhdWQiOiJbUk9MRV9BVVRIT1IsIHBsYXllcjphZG1pbiwgcGxheWVyOnBsYXksIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMDg2NH0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n    \"userName\": \"Author\"\r\n    }",
+					"raw": "    {\r\n    \"username\": \"Author\"\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -194,7 +297,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/players/example2",
+					"raw": "localhost:8080/api/players/1",
 					"host": [
 						"localhost"
 					],
@@ -202,20 +305,29 @@
 					"path": [
 						"api",
 						"players",
-						"example2"
+						"1"
 					]
-				},
-				"description": "You have to put the correct password"
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "Get roll dices by player id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjY4NjQsImlzcyI6IlBpZXJvIiwic3ViIjoiUGllcm8iLCJhdWQiOiJbUk9MRV9BVVRIT1IsIHBsYXllcjphZG1pbiwgcGxheWVyOnBsYXksIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMDg2NH0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/players/example2/games",
+					"raw": "localhost:8080/api/players/3/games",
 					"host": [
 						"localhost"
 					],
@@ -223,7 +335,7 @@
 					"path": [
 						"api",
 						"players",
-						"example2",
+						"3",
 						"games"
 					]
 				}
@@ -233,10 +345,20 @@
 		{
 			"name": "Get player by id",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjcxOTQsImlzcyI6IlBpZXJvIiwic3ViIjoiSm9uYXRhbiIsImF1ZCI6IltST0xFX0FETUlOLCBwbGF5ZXI6YWRtaW4sIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMTE5NH0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/api/players/example1",
+					"raw": "localhost:8080/api/players/2",
 					"host": [
 						"localhost"
 					],
@@ -244,7 +366,7 @@
 					"path": [
 						"api",
 						"players",
-						"example1"
+						"2"
 					]
 				}
 			},
@@ -253,6 +375,16 @@
 		{
 			"name": "Get average ranking",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjc0ODUsImlzcyI6IlBpZXJvIiwic3ViIjoiSm9uYXRhbiIsImF1ZCI6IltST0xFX0FETUlOLCBwbGF5ZXI6YWRtaW4sIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMTQ4NX0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -273,6 +405,16 @@
 		{
 			"name": "Get all players",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjc0ODUsImlzcyI6IlBpZXJvIiwic3ViIjoiSm9uYXRhbiIsImF1ZCI6IltST0xFX0FETUlOLCBwbGF5ZXI6YWRtaW4sIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMTQ4NX0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -292,6 +434,16 @@
 		{
 			"name": "Get best succes rate",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjc0ODUsImlzcyI6IlBpZXJvIiwic3ViIjoiSm9uYXRhbiIsImF1ZCI6IltST0xFX0FETUlOLCBwbGF5ZXI6YWRtaW4sIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMTQ4NX0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -313,6 +465,16 @@
 		{
 			"name": "Get worst succes rate",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJub25lIn0.eyJpYXQiOjE2MDYxNjc0ODUsImlzcyI6IlBpZXJvIiwic3ViIjoiSm9uYXRhbiIsImF1ZCI6IltST0xFX0FETUlOLCBwbGF5ZXI6YWRtaW4sIHBsYXllcjpyZWFkXSIsImV4cCI6MTYwNzAzMTQ4NX0.",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {

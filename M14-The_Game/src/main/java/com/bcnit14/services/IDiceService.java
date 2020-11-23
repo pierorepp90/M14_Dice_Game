@@ -15,6 +15,6 @@ public interface IDiceService {
 	
 	public void deleteById(String id);
 	
-	public List<Dice> findDicesByPlayerId(String playerId);
+	public List<Dice> findDicesByPlayerId(String playerId) throws Exception;
 
 }

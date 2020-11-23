@@ -14,7 +14,7 @@ public interface IPlayerService {
 
 	public void sortBySuccesRate(List<Player> players);
 
-	public void deletePlayer(String id);
+	public void deletePlayer(String id) throws Exception;
 	
 	public List<Player> saveAll();
 

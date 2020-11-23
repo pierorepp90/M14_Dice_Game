@@ -1,7 +1,8 @@
 package com.bcnit14.security;
 
+//read, play permissions unused
 public enum DiceGamePermission {
-	PLAYER_READ("player:read"), PLAYER_DELETE("player:delete"), PLAYER_PLAY("player:play");
+	PLAYER_READ("player:read"), PLAYER_ADMIN("player:admin"), PLAYER_PLAY("player:play");
 
 	private final String permission;
 

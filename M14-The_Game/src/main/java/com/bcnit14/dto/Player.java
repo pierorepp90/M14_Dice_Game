@@ -7,23 +7,28 @@ import javax.persistence.Id;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.bcnit14.security.DiceGameRoles;
+
+import static com.bcnit14.security.DiceGameRoles.*;
+
 @Document(collection = "players")
 public class Player {
 
 	@Id
 	private String id;
 	private Date accountTime;
-	private String userName;
+	private String username;
 	private String password;
 	private Double succesRate;
+	private DiceGameRoles role = PLAYER;
 
 	public Player() {
 	}
 
-	public Player(String id, String userName, String password) {
+	public Player(String id, String username, String password) {
 		this.id = id;
 		this.accountTime = new Date();
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 
 	}
@@ -36,8 +41,8 @@ public class Player {
 		return accountTime;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
 	public String getPassword() {
@@ -52,8 +57,8 @@ public class Player {
 		this.accountTime = accountTime;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public void setPassword(String password) {
@@ -73,5 +78,13 @@ public class Player {
 		}else {
 			this.succesRate = (double) (dices.stream().filter(d -> d.isWin()).count())/dices.size()*100;
 		}
+	}
+
+	public DiceGameRoles getRole() {
+		return role;
+	}
+
+	public void setRole(DiceGameRoles role) {
+		this.role = role;
 	}
 }

@@ -22,7 +22,7 @@ public class ErrorController extends DefaultResponseErrorHandler {
 	@ExceptionHandler({AccessControlException.class, AccessDeniedException.class })
 	@ResponseBody
 	public ResponseEntity<StringDto> requestForbidden() {
-		return new ResponseEntity<>(StringDto.stringToJson("You shall not pass!"), HttpStatus.FORBIDDEN);
+		return new ResponseEntity<>(StringDto.stringToJson("Sorry,you don't have the required permissions for this section."), HttpStatus.FORBIDDEN);
 
 	}
 

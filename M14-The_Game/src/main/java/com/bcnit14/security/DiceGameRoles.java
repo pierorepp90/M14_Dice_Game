@@ -10,9 +10,9 @@ import com.google.common.collect.Sets;
 
 public enum DiceGameRoles {
 
-	AUTHOR(Sets.newHashSet(PLAYER_READ, PLAYER_DELETE, PLAYER_PLAY)),
-	PLAYER(Sets.newHashSet(PLAYER_READ, PLAYER_PLAY)),
-	ADMIN(Sets.newHashSet(PLAYER_READ, PLAYER_DELETE));
+	AUTHOR(Sets.newHashSet(PLAYER_READ, PLAYER_ADMIN, PLAYER_PLAY)),
+	PLAYER(Sets.newHashSet(PLAYER_PLAY)),
+	ADMIN(Sets.newHashSet(PLAYER_READ, PLAYER_ADMIN));
 
 	private final Set<DiceGamePermission> permissions;
 

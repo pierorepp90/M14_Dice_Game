@@ -13,6 +13,6 @@ import com.bcnit14.dto.Player;
 @Transactional
 public interface IPlayerDao extends MongoRepository<Player, String> {
 
-	public List<Player> findByUserNameContains(String userName);
+	public List<Player> findByUsernameContains(String userName);
 
 }
