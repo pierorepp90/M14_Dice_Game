@@ -1,6 +1,7 @@
 package com.bcnit14.controller;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bcnit14.dto.Dice;
 import com.bcnit14.dto.DiceDto;
 import com.bcnit14.dto.Player;
 import com.bcnit14.dto.PlayerDto;
@@ -64,16 +66,24 @@ public class Controller {
 
 	@PostMapping("/players/{id}/games")
 	public ResponseEntity<DiceDto> rollDice(@PathVariable(name = "id") String id) throws Exception {
+		@SuppressWarnings("unused")
+		Player playerById = playerS.findPlayerById(id);
 		return new ResponseEntity<>(DiceDto.diceToJson(diceS.rollDicesById(id)), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/players/{id}/games")
 	public void deleteDicesByPlayerId(@PathVariable(name = "id") String id) throws Exception {
-		diceS.findDicesByPlayerId(id).forEach(d -> diceS.deleteById(d.getId()));
+		List<Dice> dicesByPlayerId = diceS.findDicesByPlayerId(id);
+		if(dicesByPlayerId.size() == 0) {
+			throw new NoSuchElementException("There are no games registred with the provided id");
+		}
+		dicesByPlayerId.forEach(d -> diceS.deleteById(d.getId()));
 	}
 
 	@DeleteMapping("/players/{id}")
 	public void deletePlayerById(@PathVariable(name = "id") String id) throws Exception {
+		@SuppressWarnings("unused")
+		Player playerById = playerS.findPlayerById(id);
 		playerS.deletePlayer(id);
 
 	}
@@ -93,7 +103,6 @@ public class Controller {
 			try {
 				return this.getPlayerById(p.getId()).getBody();
 			} catch (Exception e) {
-				System.out.println("Can you print this?");
 			}
 			return null;
 		}).collect(Collectors.toList());
