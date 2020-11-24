@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bcnit14.dto.Dice;
 import com.bcnit14.dto.DiceDto;
 import com.bcnit14.dto.Player;
 import com.bcnit14.dto.PlayerDto;
@@ -54,11 +52,7 @@ public class Controller {
 	public ResponseEntity<PlayerDto> editPlayer(@PathVariable(name = "id") Integer id, @RequestBody Player player)
 			throws Exception {
 		Player editedPlayer = playerS.findPlayerById(id);
-		if (editedPlayer.getPassword().equals(player.getPassword())) {
-			editedPlayer.setUserName(player.getUserName());
-		} else {
-			return new ResponseEntity<>(PlayerDto.playerToJson(player), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		editedPlayer.setUserName(player.getUserName());
 		return new ResponseEntity<>(PlayerDto.playerToJson(playerS.createPlayer(editedPlayer)), HttpStatus.OK);
 	}
 
@@ -86,10 +80,17 @@ public class Controller {
 		return new ResponseEntity<>(playersDto, HttpStatus.OK);
 	}
 
+	@GetMapping("/players/{id}")
+	public ResponseEntity<PlayerDto> getPlayerById(@PathVariable(name = "id") Integer id) throws Exception {
+		Player showingPlayer = playerS.findPlayerById(id);
+		showingPlayer.setSuccesRate();
+		return new ResponseEntity<>(PlayerDto.playerToJson(playerS.createPlayer(showingPlayer)), HttpStatus.OK);
+	}
+
 	@GetMapping("/players/{id}/games")
 	public ResponseEntity<List<DiceDto>> showGames(@PathVariable(name = "id") Integer id) throws Exception {
-		List<DiceDto> dicesDto = diceS.findAllDices().stream().map(d -> DiceDto.diceToJson(d))
-				.collect(Collectors.toList());
+		List<DiceDto> dicesDto = diceS.findAllDices().stream().filter(d -> d.getPlayer().getId().equals(id))
+				.map(d -> DiceDto.diceToJson(d)).collect(Collectors.toList());
 
 		return new ResponseEntity<>(dicesDto, HttpStatus.OK);
 	}

@@ -88,8 +88,8 @@ public class Player {
 	}
 
 	public void setSuccesRate() {
-		if (this.dices.isEmpty()) {
-			this.succesRate = (double) 0;
+		if(dices == null || dices.isEmpty()) {
+			this.succesRate = 0.0;
 		} else {
 			List<Dice> winDices = this.dices.stream().filter(d -> d.isWin()).collect(Collectors.toList());
 			this.succesRate = ((double) winDices.size() / this.dices.size()) * 100;
