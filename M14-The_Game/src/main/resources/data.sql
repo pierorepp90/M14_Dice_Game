@@ -9,7 +9,7 @@ CREATE TABLE `players` (
   `account_time` datetime NOT NULL,
   `user_name` varchar(250) NOT NULL,
   `password` varchar(250) NOT NULL,
-  `succes_rate` double(19,4) NOT NULL,
+  `succes_rate` double(19,4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 

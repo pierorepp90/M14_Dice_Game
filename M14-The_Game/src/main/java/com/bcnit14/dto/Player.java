@@ -31,7 +31,7 @@ public class Player {
 	@Column(name = "password")
 	private String password;
 	@Column(name = "succes_rate")
-	private Double succesRate;
+	private Double succesRate = 0.0;
 
 	@OneToMany(mappedBy = "player", orphanRemoval = true, targetEntity = Dice.class)
 	private List<Dice> dices;
